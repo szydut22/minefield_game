@@ -1,6 +1,8 @@
 function generate_table() {
+     console.log("generate_table");
       // get the reference for the body
-      var body = document.getElementsByTagId("minefield")[0];
+      var minefiled = document.getElementById("minefield");
+    
      
       // creates a <table> element and a <tbody> element
       var tbl = document.createElement("table");
@@ -20,5 +22,10 @@ function generate_table() {
           cell.appendChild(cellText);
           row.appendChild(cell);
         }
-    }
+        tblBody.appendChild(row);
+      }
+
+    tbl.appendChild(tblBody);
+    minefiled.appendChild(tbl);
 }
+     

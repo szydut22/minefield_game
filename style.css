@@ -1,0 +1,37 @@
+body{
+    text-align: center;
+	font-size: 18px;
+	font-family: 'Roboto Mono', monospace;
+}
+.header{
+    margin-left: auto;
+    margin-right: auto;
+    background:#f4f4f4;
+	border-bottom:#ccc 3px solid;
+	padding:20px;
+}
+
+.livesmeter{
+    float:left;
+	width:200px;
+	height: 130px;
+	background-color:darkgrey;
+}
+
+.pointsmeter{
+    float: right;
+	width: 200px;
+	height: 130px; 
+	background-color: darkgrey;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 8%;
+    width: 100%;
+    background-color: darkgrey;
+    color: #303030;
+    text-align: center;
+    }

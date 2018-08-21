@@ -1,16 +1,30 @@
-<!Doctype <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
     <title>Minefield</title>
 <head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+    <link href="style.css" rel="stylesheet" />
+    <link href="model.js" rel="stylesheet" />
+    </head>
+<body>
+    <div class="header">
+        <h1 id = "heading">Minefield</h1>
+    </div>
+    <input type="button" value="Generate a table." onclick="generate_table();">
+    <div class="pointsmeter" />
+		Licznik punktów<br>
+	<p  id="pointsmeter"></p>
+    </div>
+    <div class="livesmeter" />
+        Licznik zyć
+    <p  id="livesmeter"></p></div>
+    <div id="minefield">
+    </div>
+    <div class="footer">
+        <p id="wins_lives"></p>
+    </div>
 
-
-
-
-
-
-
-    <script>
-    
+    <script type="text/javascript" src="controller.js">
     </script>
-</head>
+</body>
 </html>
