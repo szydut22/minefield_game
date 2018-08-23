@@ -21,8 +21,8 @@ function generateMinefield(minefiled, sizeX, sizeY) {
          cell.setAttribute("width","40px");
          cell.setAttribute("height","40px");
          cell.setAttribute("bgcolor","grey");
-         cell.setAttribute("onclick","onFieldClick('"+ id +"')");
-         cell.setAttribute("oncontextmenu","onFieldRightClick('"+ id +"')");
+         cell.setAttribute("onclick","onFieldClick(this)");
+         cell.setAttribute("oncontextmenu","onFieldRightClick(this)");
          cell.setAttribute("id",id);
          var cellText = document.createTextNode("1");
          cell.appendChild(cellText);

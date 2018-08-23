@@ -3,12 +3,12 @@ function initGame(){
     generateMinefield(minefiledTag, minefieldSizeX, minefieldSizeY);
 }
 
-function onFieldClick(fieldId){
-    console.log("kliknięto pole " + fieldId);
+function onFieldClick(field){
+    console.log("kliknięto pole " + field.id);
 }
 
-function onFieldRightClick(fieldId){
-    console.log("kliknieto pole prawym prszycikiem myszy " + fieldId);
+function onFieldRightClick(field){
+    console.log("kliknieto pole prawym prszycikiem myszy " + field.id);
 }
 
 initGame();
