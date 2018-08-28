@@ -32,6 +32,14 @@ function generateMinefield(minefiled, sizeX, sizeY) {
      }
 
    tbl.appendChild(tblBody);
+
+   clearMinefieldView(minefiled);
    minefiled.appendChild(tbl);
 }
     
+
+function clearMinefieldView(minefiled){
+      for(var i = 0; i < minefiled.childNodes.length; i++){
+            minefiled.removeChild(minefiled.childNodes[0]); 
+      }
+}
