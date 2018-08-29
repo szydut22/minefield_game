@@ -1,18 +1,28 @@
 model = {
     minefieldSizeX: 16, 
     minefieldSizeY: 10,
-
+    
     minefield: [],
+
+    lives: 1,
+    points: 0,
+
+    // export these functions as model API
     initMinefiled: initMinefiledModel2,
+    
     revielField: revielField2,
-    isRevield: isrevielField2,
+    isRevield: isRevield,
     isTreasure: isTreasure2,
     isBomb: isBomb2,
+
+    addLives: addLives,
+    takeLive: takeLive,
+    addPoints: addPoints
 }
 
-function isrevielField2(x, y){
+function isRevield(x, y){
     var cell = model.minefield[x][y];
-    if(cell.hasRevield){
+    if(cell.revield){
         return true;
     }else{
         return false;
@@ -21,7 +31,7 @@ function isrevielField2(x, y){
 
 function isTreasure2(x, y){
     var cell = model.minefield[x][y];
-    if(cell.hasTreasure){
+    if(cell.treasure){
         return true;
     }else{
         return false;
@@ -30,7 +40,7 @@ function isTreasure2(x, y){
 function isBomb2(x, y){
     var cell = model.minefield[x][y];
     console.log(cell);
-    if(cell.hasBomb){
+    if(cell.bomb){
         console.log('isBomb zwraca true');
         return true;
     }else{
@@ -48,24 +58,38 @@ function initMinefiledModel2(sizeX, sizeY){
 
         for (var j = 0; j < sizeY; j++) {
             var cell = {
-                hasBomb: false,
-                hasTresure: false,
-                isRevield: false
+                bomb: false,
+                treasure: false,
+                revield: false
             }        
             if (Math.random() < 0.2){
-                cell.hasBomb=true;
+                cell.bomb=true;
             }else if (Math.random() < 0.1){
-                cell.hasTreasure=true;
+                cell.treasure=true;
             }
             row.push(cell);
         }
         
        model.minefield.push(row);
     }
-    console.log(model);
 }
 
 function revielField2(x,y){
-    model.minefield[x][y].isRevield=true;
+    model.minefield[x][y].revield=true;
+}
+
+function addLives(l){
+    model.lives = model.lives + l;
+    return model.lives;
+}
+
+function takeLive(){
+    model.lives = model.lives - 1;
+    return model.lives;
+}
+
+function addPoints(p){
+    model.points = model.points + p;
+    return model.points;
 }
 

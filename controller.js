@@ -2,7 +2,8 @@ function initGame(){
     var minefiledTag = document.getElementById("minefield");
     generateMinefield(minefiledTag, model.minefieldSizeX, model.minefieldSizeY);
     model.initMinefiled(model.minefieldSizeX, model.minefieldSizeY);
-    console.log(model);
+    view.updateLiveCounter(model.addLives(0));
+    view.updatePointsCounter(model.addPoints(0));
 }
 
 function onFieldClick(field){
@@ -11,26 +12,27 @@ function onFieldClick(field){
     var y = temp[2];
     x = parseInt(x);
     y = parseInt(y);
+    
+    if(!model.isRevield(x, y)){
+        model.revielField(x, y);
+        view.openCell(field);
+        givePoint();
 
-    model.revielField(x, y);
-    view.openCell(field);
-
-    if (model.isBomb(x,y)) {
-        view.showBomb(field);
-        console.log()
-    } else {
-        if(model.isTreasure(x, y)){
-            view.showTresure(field);
+        if (model.isBomb(x,y)) {
+            view.showBomb(field);
+            takeLive(); 
+        } else {
+            if(model.isTreasure(x, y)){
+                view.showTresure(field);
+                giveLive();
+            }
         }
     }
- 
-    //model.isRevield(x,y)
-
 
 }
 
 function onFieldRightClick(field){
-    console.log("kliknieto pole prawym prszycikiem myszy " + field.id);
+    view.showFlag(field);
 }
 
 
@@ -79,4 +81,20 @@ function clearMinefieldView(minefiled){
       }
 }
 
-initGame();
+function givePoint(){
+    var currentPoints = model.addPoints(1);
+    view.updatePointsCounter(currentPoints);
+}
+
+function takeLive(){
+    var current = model.takeLive(1);
+    view.updateLiveCounter(current);
+    if(current < 1){
+        
+    }
+}
+
+function giveLive(){
+    view.updateLiveCounter(model.addLives(1));
+}
+

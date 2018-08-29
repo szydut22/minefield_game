@@ -7,7 +7,7 @@
     <link href="style.css" rel="stylesheet" >
     </head>
 
-<body>
+<body >
     <div class="header">
         <h1 id = "heading">Minefield</h1>
     </div>
@@ -22,7 +22,8 @@
     </div>
     
     <div>
-        <div class="livesmeter" > Licznik zyć
+        <div class="livesmeter" > 
+            Licznik zyć <br>
             <p  id="livesmeter"></p>
         </div>
     </div>
@@ -33,15 +34,19 @@
     <div class="footer">
         <p id="wins_lives"></p>
     </div>
+
     <script type='text/javascript' > 
         var model={}; 
         var view={};
     </script>
 
     <script type="text/javascript" src="model.js"></script>
-    <script type="text/javascript" src="controller.js" ></script>
     <script type="text/javascript" src="view.js"></script>
-`
+    <script type="text/javascript" src="controller.js" ></script>
+
+    <script type='text/javascript' > 
+        initGame();
+    </script>
 
 </body>
 </html>
