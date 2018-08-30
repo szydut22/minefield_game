@@ -3,6 +3,7 @@ text-align: center;
 font-size: 18px;
 font-family: 'Roboto Mono', monospace;
 }
+
 .header{
 margin-left: auto;
 margin-right: auto;
@@ -10,6 +11,14 @@ background:#f4f4f4;
 border-bottom:#ccc 3px solid;
 padding:20px;
 
+}
+
+.gameover{
+margin-left: auto;
+margin-right: auto;
+margin-top: auto;
+margin-bottom: auto;
+color: red;
 }
 
 .livesmeter{

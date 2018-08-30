@@ -7,17 +7,29 @@ model = {
     lives: 1,
     points: 0,
 
+    gameOver: false,
+
     // export these functions as model API
     initMinefiled: initMinefiledModel2,
     
-    revielField: revielField2,
+    revielField: revielField,
     isRevield: isRevield,
-    isTreasure: isTreasure2,
-    isBomb: isBomb2,
+    isTreasure: isTreasure,
+    isBomb: isBomb,
+    isFlagged: isFlagged,
+    setFlag: setFlag,
+    unsetFlag: unsetFlag,
 
     addLives: addLives,
     takeLive: takeLive,
-    addPoints: addPoints
+    addPoints: addPoints,
+
+    finishGame: finishGame,
+    startGame: startGame,
+    isGameOver: isGameOver,
+
+    getLives: getLives,
+    getPoints: getPoints,
 }
 
 function isRevield(x, y){
@@ -29,7 +41,27 @@ function isRevield(x, y){
     }
 }
 
-function isTreasure2(x, y){
+function setFlag(x,y){
+    var cell = model.minefield[x][y];
+    cell.flag=true;
+}
+
+function unsetFlag(x,y){
+    var cell = model.minefield[x][y];
+    cell.flag = false;
+}
+
+function isFlagged(x,y){
+    var cell = model.minefield[x][y];
+    if(cell.flag){
+        return true;
+    }else{
+        return false;
+    }
+    
+}
+    
+function isTreasure(x, y){
     var cell = model.minefield[x][y];
     if(cell.treasure){
         return true;
@@ -37,14 +69,11 @@ function isTreasure2(x, y){
         return false;
     }
 }
-function isBomb2(x, y){
-    var cell = model.minefield[x][y];
-    console.log(cell);
+function isBomb(x, y){
+    var cell = model.minefield[x][y]; 
     if(cell.bomb){
-        console.log('isBomb zwraca true');
         return true;
     }else{
-        console.log('isBomb zwraca false');
         return false;
     }
 }
@@ -60,7 +89,8 @@ function initMinefiledModel2(sizeX, sizeY){
             var cell = {
                 bomb: false,
                 treasure: false,
-                revield: false
+                revield: false,
+                flag: false,
             }        
             if (Math.random() < 0.2){
                 cell.bomb=true;
@@ -74,7 +104,7 @@ function initMinefiledModel2(sizeX, sizeY){
     }
 }
 
-function revielField2(x,y){
+function revielField(x,y){
     model.minefield[x][y].revield=true;
 }
 
@@ -93,3 +123,29 @@ function addPoints(p){
     return model.points;
 }
 
+function finishGame(){
+    model.gameOver = true;
+}
+
+function startGame(){
+    model.gameOver = false;
+    model.lives = 1;
+    model.points = 0;
+    model.initMinefiled(model.minefieldSizeX, model.minefieldSizeY);
+}
+
+function isGameOver(){
+    if(model.gameOver == true){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+function getLives(){
+    return model.lives;
+}
+
+function getPoints(){
+    return model.points;
+}
