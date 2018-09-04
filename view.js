@@ -3,6 +3,7 @@ view = {
     showBomb: showBomb,
     showTresure: showTresure,
     showFlag: showFlag,
+    showBombsCount: showBombsCount,
     noFlag: noFlag,
 
     updateLiveCounter: updateLiveCounter,
@@ -13,9 +14,16 @@ view = {
 
     generateMinefield: generateMinefield,
 
-    startGame: startGame
+    startGame: startGame,
+
+    getViewField: getViewField
 }
 
+// funkcja zwraca tag html o id field.x.y
+function getViewField(x, y){
+    var id = 'field.' + x + '.' + y;
+    return document.getElementById(id);
+}
 
 function openCell(field){
     field.style.backgroundColor = "white";
@@ -26,7 +34,19 @@ function showBomb(field){
 }
 
 function showTresure(field){
+    var currentHtml = field.innerHTML;
     field.innerHTML = "<img src='treasure.svg'>";
+    setTimeout(function(){ hideTreasure(field, currentHtml); }, 1500);
+}
+
+function hideTreasure(field, previousHtml = ""){
+    field.innerHTML = previousHtml;
+}
+
+function showBombsCount(field, count){
+    if(count > 0){
+        field.innerHTML = count;
+    }
 }
 
 function showFlag(field){
@@ -37,8 +57,8 @@ function noFlag(field){
     field.innerHTML = "";
 }
 
-function showGameOver(){
-    document.getElementById('gameover').innerHTML = "GAME OVER!";
+function showGameOver(message){
+    document.getElementById('gameover').innerHTML = message + " GAME OVER!";
 }
 
 function hideGameOver(){

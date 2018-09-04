@@ -1,11 +1,22 @@
+/**
+ * 
+ * This is a model handler for minesweaper game 
+ * 
+ * @author Szymon Dutka
+ * @license: MIT
+ * 
+ */
+
+
 model = {
-    minefieldSizeX: 16, 
+    minefieldSizeX: 10, 
     minefieldSizeY: 10,
     
     minefield: [],
 
     lives: 1,
     points: 0,
+    
 
     gameOver: false,
 
@@ -22,7 +33,7 @@ model = {
 
     addLives: addLives,
     takeLive: takeLive,
-    addPoints: addPoints,
+    subPoints: subPoints,
 
     finishGame: finishGame,
     startGame: startGame,
@@ -30,8 +41,18 @@ model = {
 
     getLives: getLives,
     getPoints: getPoints,
+
+    countBombs: countBombs,
 }
 
+/**
+ * This function returns true if a particular model field is currently revieled.
+ * It selects the filed by params value of x and y
+ *
+ * @param {int} x  
+ * @param {int} y
+ * @returns bool true if the field is revield
+ */
 function isRevield(x, y){
     var cell = model.minefield[x][y];
     if(cell.revield){
@@ -40,7 +61,12 @@ function isRevield(x, y){
         return false;
     }
 }
-
+/**
+ * 
+ * 
+ * @param {any} x 
+ * @param {any} y 
+ */
 function setFlag(x,y){
     var cell = model.minefield[x][y];
     cell.flag=true;
@@ -92,9 +118,10 @@ function initMinefiledModel2(sizeX, sizeY){
                 revield: false,
                 flag: false,
             }        
-            if (Math.random() < 0.2){
+            if (Math.random() < 0.3){
                 cell.bomb=true;
-            }else if (Math.random() < 0.1){
+                model.points = model.points - 1;
+            }else if (Math.random() < 0.3){
                 cell.treasure=true;
             }
             row.push(cell);
@@ -118,8 +145,8 @@ function takeLive(){
     return model.lives;
 }
 
-function addPoints(p){
-    model.points = model.points + p;
+function subPoints(p){
+    model.points = model.points - p;
     return model.points;
 }
 
@@ -130,7 +157,7 @@ function finishGame(){
 function startGame(){
     model.gameOver = false;
     model.lives = 1;
-    model.points = 0;
+    model.points = model.minefieldSizeX * model.minefieldSizeY;
     model.initMinefiled(model.minefieldSizeX, model.minefieldSizeY);
 }
 
@@ -149,3 +176,33 @@ function getLives(){
 function getPoints(){
     return model.points;
 }
+
+function countBombs(x, y){
+    var bombsCount = 0;
+    if(y > 0 && model.minefield[x][y - 1].bomb == true){
+        bombsCount = bombsCount + 1; 
+    }
+    if(y < model.minefieldSizeY - 1 && model.minefield[x][y + 1].bomb == true){
+        bombsCount = bombsCount + 1; 
+    }
+    if(x > 0 && model.minefield[x - 1][y].bomb == true){
+        bombsCount = bombsCount + 1; 
+    }
+    if(x < model.minefieldSizeX - 1 &&  model.minefield[x + 1][y].bomb == true){
+        bombsCount = bombsCount + 1; 
+    }
+    if(x > 0 && y > 0 && model.minefield[x - 1][y - 1].bomb == true){
+        bombsCount = bombsCount + 1; 
+    }
+    if(x < model.minefieldSizeX - 1 && y < model.minefieldSizeY - 1 && model.minefield[x + 1][y + 1].bomb == true){
+        bombsCount = bombsCount + 1; 
+    }
+    if(x > 0 && y < model.minefieldSizeY - 1 && model.minefield[x - 1][y + 1].bomb == true){
+        bombsCount = bombsCount + 1; 
+    }
+    if(x < model.minefieldSizeX - 1 && y > 0 && model.minefield[x + 1][y - 1].bomb == true){
+        bombsCount = bombsCount + 1; 
+    }
+    
+    return bombsCount;
+}           
