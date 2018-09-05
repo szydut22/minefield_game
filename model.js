@@ -62,7 +62,8 @@ function isRevield(x, y){
     }
 }
 /**
- * 
+ * This function set true for flag 
+ * It selects the filed by params value of x and y
  * 
  * @param {any} x 
  * @param {any} y 
@@ -71,12 +72,23 @@ function setFlag(x,y){
     var cell = model.minefield[x][y];
     cell.flag=true;
 }
-
+/**
+ * This function set false for flag 
+ * It selects the filed by params value of x and y
+ * @param {any} x 
+ * @param {any} y 
+ */
 function unsetFlag(x,y){
     var cell = model.minefield[x][y];
     cell.flag = false;
 }
-
+/**
+ * This fucntion returns true if particular model flag is currently set.
+ * It selects the filed by params value of x and y
+ * @param {any} x 
+ * @param {any} y 
+ * @returns bool true if the flag is set
+ */
 function isFlagged(x,y){
     var cell = model.minefield[x][y];
     if(cell.flag){
@@ -86,7 +98,13 @@ function isFlagged(x,y){
     }
     
 }
-    
+/**
+ * This function returns true if Treasure is currently clicked.
+ * It selects the filed by params value of x and y
+ * @param {any} x 
+ * @param {any} y 
+ * @returns true/false
+ */
 function isTreasure(x, y){
     var cell = model.minefield[x][y];
     if(cell.treasure){
@@ -94,7 +112,13 @@ function isTreasure(x, y){
     }else{
         return false;
     }
-}
+/**
+ * This function returns true if Bomb is currently clicked.
+ * It selects the filed by params value of x and y
+ * @param {any} x 
+ * @param {any} y 
+ * @returns true/false
+ */
 function isBomb(x, y){
     var cell = model.minefield[x][y]; 
     if(cell.bomb){
@@ -104,7 +128,12 @@ function isBomb(x, y){
     }
 }
 
-
+/**
+ * This fucntion 
+ * 
+ * @param {any} sizeX 
+ * @param {any} sizeY 
+ */
 function initMinefiledModel2(sizeX, sizeY){
     model.minefield = [];
     
@@ -130,37 +159,66 @@ function initMinefiledModel2(sizeX, sizeY){
        model.minefield.push(row);
     }
 }
-
+/**
+ * This function set true for reviel Field.
+ * It selects the filed by params value of x and y
+ * @param {any} x 
+ * @param {any} y 
+ */
 function revielField(x,y){
     model.minefield[x][y].revield=true;
 }
-
+/**
+ * 
+ * 
+ * @param {any} l 
+ * @returns 
+ */
 function addLives(l){
     model.lives = model.lives + l;
     return model.lives;
 }
-
+/**
+ * 
+ * 
+ * @returns 
+ */
 function takeLive(){
     model.lives = model.lives - 1;
     return model.lives;
 }
-
+/**
+ * 
+ * 
+ * @param {any} p 
+ * @returns 
+ */
 function subPoints(p){
     model.points = model.points - p;
     return model.points;
 }
-
+/**
+ * 
+ * 
+ */
 function finishGame(){
     model.gameOver = true;
 }
-
+/**
+ * 
+ * 
+ */
 function startGame(){
     model.gameOver = false;
     model.lives = 1;
     model.points = model.minefieldSizeX * model.minefieldSizeY;
     model.initMinefiled(model.minefieldSizeX, model.minefieldSizeY);
 }
-
+/**
+ * This function returns true if game is currently finished
+ * 
+ * @returns bool true if game is over 
+ */
 function isGameOver(){
     if(model.gameOver == true){
         return true;
@@ -168,15 +226,30 @@ function isGameOver(){
         return false;
     }
 }
-
+/**
+ * 
+ * 
+ * @returns 
+ */
 function getLives(){
     return model.lives;
 }
-
+/**
+ * This function adds points to your game
+ * 
+ * @returns points for your game 
+ */
 function getPoints(){
     return model.points;
 }
-
+/**
+ * This function is counting bombs around your revield bracket
+ * It selects the filed by params value of x and y
+ * 
+ * @param {any} x 
+ * @param {any} y 
+ * @returns 
+ */
 function countBombs(x, y){
     var bombsCount = 0;
     if(y > 0 && model.minefield[x][y - 1].bomb == true){
