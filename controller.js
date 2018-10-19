@@ -107,5 +107,3 @@ function takeLive(){
 function giveLive(){
     view.updateLiveCounter(model.addLives(1));
 }
-
-
